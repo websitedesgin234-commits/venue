@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="account">
+<!--@header-->
+
+<main id="main">
+  <section class="page-head account-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span>Account</span>
+      </nav>
+      <span class="eyebrow">Private client</span>
+      <h1>Your account.</h1>
+      <p>Sign in to see your orders, keep your details current and move through checkout faster.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight account-section">
+    <div class="container">
+      <div class="account-loading" data-account-loading>
+        <span class="account-loading__mark">V</span>
+        <p>Opening your account…</p>
+      </div>
+
+      <div class="auth-layout" data-auth-view hidden>
+        <div class="auth-copy">
+          <span class="eyebrow eyebrow--plain">VELUNE account</span>
+          <h2>Keep your orders<br>and details together.</h2>
+          <ul class="auth-benefits">
+            <li><span>01</span>View every order and its tracking in one place.</li>
+            <li><span>02</span>Checkout without re-entering your details.</li>
+            <li><span>03</span>Ask client care about an order without hunting for the number.</li>
+          </ul>
+          <p class="auth-copy__note">Accounts are optional. Guest checkout and order lookup remain available.</p>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-tabs" role="tablist" aria-label="Account access">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-auth-tab="login">Sign in</button>
+            <button type="button" role="tab" aria-selected="false" data-auth-tab="register">Create account</button>
+          </div>
+
+          <div data-auth-panel="login">
+            <h2>Welcome back.</h2>
+            <p class="auth-card__sub">Sign in with the email you use at checkout.</p>
+            <form data-login-form novalidate>
+              <div class="field">
+                <label for="login-email">Email</label>
+                <input id="login-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label for="login-password">Password</label>
+                <input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="200" placeholder="Your password">
+              </div>
+              <p class="form-error" role="alert" data-auth-error></p>
+              <button class="btn btn--wide" type="submit" data-login-submit>Sign in</button>
+              <p class="auth-card__foot">Forgot your password? <a href="/contact">Contact client care</a> and we will help.</p>
+            </form>
+          </div>
+
+          <div data-auth-panel="register" hidden>
+            <h2>Create an account.</h2>
+            <p class="auth-card__sub">Use at least 10 characters for your password. We verify your email and mobile with a one-time code.</p>
+            <form data-register-form novalidate>
+              <div class="field-row">
+                <div class="field">
+                  <label for="register-first">First name</label>
+                  <input id="register-first" name="firstName" type="text" autocomplete="given-name" required minlength="2" maxlength="60">
+                  <p class="form-error" role="alert" data-register-field-error="firstName"></p>
+                </div>
+                <div class="field">
+                  <label for="register-last">Last name</label>
+                  <input id="register-last" name="lastName" type="text" autocomplete="family-name" required minlength="2" maxlength="60">
+                  <p class="form-error" role="alert" data-register-field-error="lastName"></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="register-email">Email</label>
+                <input id="register-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com">
+                <p class="form-error" role="alert" data-register-field-error="email"></p>
+              </div>
+              <div class="field">
+                <label for="register-mobile">Mobile</label>
+                <input id="register-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" required maxlength="24" placeholder="+91 98765 43210"
+                       aria-describedby="register-mobile-hint">
+                <span class="field-hint" id="register-mobile-hint">India: 10 digits starting 6&ndash;9, for example 98765 43210. Elsewhere: dialling code first, for example +1 415 555 0132.</span>
+                <p class="form-error" role="alert" data-register-field-error="mobile"></p>
+              </div>
+              <div class="field">
+                <label for="register-password">Password</label>
+                <input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="200"
+                       placeholder="At least 10 characters" aria-describedby="register-password-hint">
+                <span class="pwd-meter" aria-hidden="true"><span class="pwd-meter__bar" data-register-pwd-bar></span></span>
+                <span class="field-hint" id="register-password-hint" role="status" data-register-pwd-hint>At least 10 characters. Mixed case with a number is stronger.</span>
+                <p class="form-error" role="alert" data-register-field-error="password"></p>
+              </div>
+              <div class="field">
+                <label for="register-confirm">Confirm password</label>
+                <input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" required maxlength="200" placeholder="Repeat your password">
+                <p class="form-error" role="alert" data-register-field-error="confirmPassword"></p>
+              </div>
+
+              <div class="opt-block">
+                <p class="opt-block__title" id="register-avatar-label">Profile picture</p>
+                <div class="opt-row">
+                  <button class="btn btn--ghost btn--small" type="button" data-register-avatar-btn>Choose picture</button>
+                  <input id="register-avatar" name="profilePicture" type="file" accept="image/png,image/jpeg,image/webp" aria-labelledby="register-avatar-label" hidden data-register-avatar-input>
+                  <span class="field-hint" role="status" data-register-avatar-name>No picture selected</span>
+                </div>
+                <img class="avatar-thumb" alt="Selected profile picture preview" data-register-avatar-preview hidden>
+                <p class="field-hint">JPEG, PNG or WebP, 5 MB or smaller. Kept private &mdash; it is never published to a public link.</p>
+                <p class="form-error" role="alert" data-register-avatar-error></p>
+              </div>
+
+              <div class="opt-block">
+                <p class="opt-block__title">Identity document <span class="opt-tag">Optional</span></p>
+                <p class="field-hint">Only needed for wholesale or reseller access &mdash; the email and mobile codes verify a retail account on their own.
+                  <a href="/policies#privacy">Why we ask</a>.</p>
+                <div class="field">
+                  <label for="register-doc-type">Document type</label>
+                  <select id="register-doc-type" name="docType" data-register-doc-type>
+                    <option value="">No document for now</option>
+                    <option value="aadhaar">Aadhaar</option>
+                    <option value="passport">Passport</option>
+                    <option value="driving-licence">Driving licence</option>
+                    <option value="voter-id">Voter ID</option>
+                  </select>
+                </div>
+                <div class="doc-sides">
+                  <div class="doc-side">
+                    <p class="doc-side__title" id="register-doc-front-label">Front <span class="opt-tag">Pair</span></p>
+                    <div class="opt-row">
+                      <button class="btn btn--ghost btn--small" type="button" data-register-doc-front-btn>Choose file</button>
+                      <input id="register-doc-front" name="docFront" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" aria-labelledby="register-doc-front-label" hidden data-register-doc-front-input>
+                    </div>
+                    <span class="field-hint" role="status" data-register-doc-front-name>No file chosen</span>
+                  </div>
+                  <div class="doc-side">
+                    <p class="doc-side__title" id="register-doc-back-label">Reverse <span class="opt-tag">Pair</span></p>
+                    <div class="opt-row">
+                      <button class="btn btn--ghost btn--small" type="button" data-register-doc-back-btn>Choose file</button>
+                      <input id="register-doc-back" name="docBack" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" aria-labelledby="register-doc-back-label" hidden data-register-doc-back-input>
+                    </div>
+                    <span class="field-hint" role="status" data-register-doc-back-name>No file chosen</span>
+                  </div>
+                </div>
+                <p class="field-hint">Both sides upload together as one pair, JPEG, PNG, WebP or PDF, 5 MB each or smaller.</p>
+                <p class="form-error" role="alert" data-register-doc-error></p>
+              </div>
+
+              <label class="check-line"><input type="checkbox" name="marketingOptIn"> Send me the occasional considered update.</label>
+              <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <p class="form-error" role="alert" data-register-error></p>
+              <button class="btn btn--wide" type="submit" data-register-submit>Create account</button>
+              <p class="auth-card__foot">By creating an account you agree to our <a href="/policies#terms">terms</a> and <a href="/policies#privacy">privacy policy</a>.</p>
+            </form>
+            <div data-otp-slot="signup">
+              <div class="otp" data-otp-panel hidden>
+                <div class="otp__head">
+                  <h3 class="otp__title">Confirm your details</h3>
+                  <p class="field-hint" role="status" data-otp-status>Enter the 6-digit codes we sent. They expire in 10 minutes.</p>
+                </div>
+
+                <section class="otp-channel" role="group" aria-labelledby="otp-label-email" data-otp-channel="email">
+                  <p class="otp-channel__title" id="otp-label-email">Email code</p>
+                  <p class="otp-channel__dest">We sent it to <strong data-otp-dest="email">&mdash;</strong></p>
+                  <div class="otp-dev" role="status" data-otp-dev="email" hidden></div>
+                  <div class="otp-code" data-otp-inputs="email"></div>
+                  <p class="form-error" role="alert" data-otp-error="email"></p>
+                  <div class="otp-channel__actions">
+                    <button class="btn btn--small" type="button" data-otp-verify="email">Verify email</button>
+                    <button class="btn btn--ghost btn--small" type="button" data-otp-resend="email">Send a new code</button>
+                  </div>
+                  <p class="field-hint" aria-live="polite" data-otp-hint="email"></p>
+                </section>
+
+                <section class="otp-channel" role="group" aria-labelledby="otp-label-phone" data-otp-channel="phone">
+                  <p class="otp-channel__title" id="otp-label-phone">Mobile code</p>
+                  <p class="otp-channel__dest">We sent it to <strong data-otp-dest="phone">&mdash;</strong></p>
+                  <div class="otp-dev" role="status" data-otp-dev="phone" hidden></div>
+                  <div class="otp-code" data-otp-inputs="phone"></div>
+                  <p class="form-error" role="alert" data-otp-error="phone"></p>
+                  <div class="otp-channel__actions">
+                    <button class="btn btn--small" type="button" data-otp-verify="phone">Verify mobile</button>
+                    <button class="btn btn--ghost btn--small" type="button" data-otp-resend="phone">Send a new code</button>
+                  </div>
+                  <p class="field-hint" aria-live="polite" data-otp-hint="phone"></p>
+                </section>
+
+                <div class="otp__foot">
+                  <button class="btn btn--outline btn--small" type="button" data-otp-skip>Finish for now</button>
+                  <button class="btn btn--ghost btn--small" type="button" data-otp-close hidden>Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-account-view hidden>
+        <div class="account-banner">
+          <div>
+            <span class="eyebrow eyebrow--plain">Signed in</span>
+            <h2>Good to see you, <span data-account-first>friend</span>.</h2>
+            <p>Your orders and details are below. <a href="/shop">Continue exploring</a> whenever you are ready.</p>
+          </div>
+          <div class="account-banner__actions">
+            <a class="btn btn--outline btn--small" href="/order">Track a guest order</a>
+            <button class="btn btn--small" type="button" data-logout>Sign out</button>
+          </div>
+        </div>
+
+        <div class="account-stats">
+          <div><span>Orders</span><strong data-account-order-count>0</strong></div>
+          <div><span>Member since</span><strong data-account-since>—</strong></div>
+          <div><span>Email</span><strong data-account-email>—</strong></div>
+        </div>
+
+        <!-- ============ VERIFICATION ============ -->
+        <section class="account-panel vpanel" data-verification-panel>
+          <div class="account-panel__head">
+            <h2>Verification</h2>
+            <span class="vstatus-badge" data-verify-badge>Checking</span>
+          </div>
+          <p class="vpanel__lead" role="status" aria-live="polite" data-verify-summary>Loading your verification status&hellip;</p>
+
+          <div class="vrows">
+            <div class="vrow">
+              <span class="vrow__label">Email</span>
+              <span class="vrow__value" data-verify-email-value>&mdash;</span>
+              <span class="vrow__state" data-verify-email-state>&mdash;</span>
+              <button class="btn btn--ghost btn--small" type="button" data-verify-email-send>Verify by code</button>
+            </div>
+            <div class="vrow">
+              <span class="vrow__label">Mobile</span>
+              <span class="vrow__value" data-verify-phone-value>&mdash;</span>
+              <span class="vrow__state" data-verify-phone-state>&mdash;</span>
+              <button class="btn btn--ghost btn--small" type="button" data-verify-phone-send>Verify by code</button>
+            </div>
+          </div>
+
+          <div data-otp-slot="account"></div>
+
+          <p class="vpanel__sub">What is left to do</p>
+          <ul class="vsteps" data-verify-steps></ul>
+
+          <div class="vgates">
+            <p class="vgate" data-verify-gate-checkout>&mdash;</p>
+            <p class="vgate" data-verify-gate-reseller>&mdash;</p>
+          </div>
+
+          <p class="vnote" role="status" data-verify-note hidden></p>
+
+          <div class="vdocs">
+            <p class="vpanel__sub">Identity documents</p>
+            <div data-verify-docs>
+              <p class="field-hint">No documents submitted.</p>
+            </div>
+
+            <div class="doc-upload">
+              <div class="field">
+                <label for="verify-doc-type">Upload a document pair</label>
+                <select id="verify-doc-type" data-verify-doc-type>
+                  <option value="">Select a type</option>
+                  <option value="aadhaar">Aadhaar</option>
+                  <option value="passport">Passport</option>
+                  <option value="driving-licence">Driving licence</option>
+                  <option value="voter-id">Voter ID</option>
+                </select>
+              </div>
+              <div class="doc-sides">
+                <div class="doc-side">
+                  <p class="doc-side__title" id="verify-doc-front-label">Front</p>
+                  <div class="opt-row">
+                    <button class="btn btn--ghost btn--small" type="button" data-verify-doc-front-btn>Choose file</button>
+                    <input id="verify-doc-front" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" aria-labelledby="verify-doc-front-label" hidden data-verify-doc-front-input>
+                  </div>
+                  <span class="field-hint" role="status" data-verify-doc-front-name>No file chosen</span>
+                </div>
+                <div class="doc-side">
+                  <p class="doc-side__title" id="verify-doc-back-label">Reverse</p>
+                  <div class="opt-row">
+                    <button class="btn btn--ghost btn--small" type="button" data-verify-doc-back-btn>Choose file</button>
+                    <input id="verify-doc-back" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" aria-labelledby="verify-doc-back-label" hidden data-verify-doc-back-input>
+                  </div>
+                  <span class="field-hint" role="status" data-verify-doc-back-name>No file chosen</span>
+                </div>
+              </div>
+              <p class="field-hint">Both sides go together, JPEG, PNG, WebP or PDF, 5 MB each or smaller. An administrator reviews them &mdash; documents are optional for retail checkout.</p>
+              <div class="vactions">
+                <button class="btn btn--small" type="button" data-verify-doc-submit>Upload pair</button>
+                <button class="btn btn--ghost btn--small" type="button" data-verify-doc-cancel hidden>Close document view</button>
+              </div>
+              <p class="form-error" role="alert" data-verify-doc-error></p>
+              <p class="account-saved" role="status" data-verify-doc-status></p>
+              <div class="doc-viewer" data-verify-doc-viewer hidden></div>
+            </div>
+          </div>
+
+          <div class="vavatar">
+            <p class="vpanel__sub">Profile picture</p>
+            <div class="avatar-row">
+              <span class="avatar-slot">
+                <img class="avatar-thumb" alt="Your profile picture" data-verify-avatar-img hidden>
+                <span class="avatar-fallback" aria-hidden="true" data-verify-avatar-fallback>V</span>
+              </span>
+              <div class="avatar-row__side">
+                <div class="opt-row">
+                  <button class="btn btn--ghost btn--small" type="button" data-verify-avatar-btn>Choose picture</button>
+                  <input id="verify-avatar-input" type="file" accept="image/png,image/jpeg,image/webp" aria-labelledby="verify-avatar-label" hidden data-verify-avatar-input>
+                </div>
+                <p class="field-hint" id="verify-avatar-label">Private to your account. JPEG, PNG or WebP, 5 MB or smaller.</p>
+                <span class="field-hint" role="status" data-verify-avatar-name>No new file selected</span>
+              </div>
+            </div>
+            <p class="form-error" role="alert" data-verify-avatar-error></p>
+            <p class="account-saved" role="status" data-verify-avatar-status></p>
+          </div>
+
+          <div class="vactions vactions--end">
+            <button class="btn btn--outline btn--small" type="button" data-verify-refresh>Re-check status</button>
+            <button class="btn btn--ghost btn--small" type="button" data-verify-support>Ask client care</button>
+          </div>
+        </section>
+        <!-- ============ /VERIFICATION ============ -->
+
+        <div class="account-columns">
+          <section class="account-panel">
+            <div class="account-panel__head">
+              <h2>Order history</h2>
+              <span>Newest first</span>
+            </div>
+            <div class="account-orders" data-account-orders></div>
+          </section>
+
+          <div class="account-side">
+            <section class="account-panel">
+              <div class="account-panel__head"><h2>Your details</h2></div>
+              <form data-profile-form novalidate>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="profile-first">First name</label>
+                    <input id="profile-first" name="firstName" type="text" required minlength="2" maxlength="60">
+                  </div>
+                  <div class="field">
+                    <label for="profile-last">Last name</label>
+                    <input id="profile-last" name="lastName" type="text" required minlength="2" maxlength="60">
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="profile-email">Email</label>
+                  <input id="profile-email" name="email" type="email" disabled>
+                  <span class="field-hint">Contact client care to change the email on your account.</span>
+                </div>
+                <div class="field">
+                  <label for="profile-phone">Phone <span>(optional)</span></label>
+                  <input id="profile-phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+                </div>
+                <label class="check-line"><input type="checkbox" name="marketingOptIn"> Occasional updates by email.</label>
+                <p class="form-error" role="alert" data-profile-error></p>
+                <p class="account-saved" role="status" data-profile-status></p>
+                <button class="btn btn--small" type="submit" data-profile-save>Save details</button>
+              </form>
+            </section>
+
+            <section class="account-panel">
+              <div class="account-panel__head"><h2>Password</h2></div>
+              <form data-password-form novalidate>
+                <div class="field">
+                  <label for="current-password">Current password</label>
+                  <input id="current-password" name="currentPassword" type="password" autocomplete="current-password" required maxlength="200">
+                </div>
+                <div class="field">
+                  <label for="new-password">New password</label>
+                  <input id="new-password" name="newPassword" type="password" autocomplete="new-password" required minlength="8" maxlength="200">
+                </div>
+                <p class="form-error" role="alert" data-password-error></p>
+                <p class="account-saved" role="status" data-password-status></p>
+                <button class="btn btn--small" type="submit" data-password-save>Update password</button>
+              </form>
+            </section>
+          </div>
+        </div><!-- /.account-columns -->
+
+        <!-- ============ RESELLER STORE ============ -->
+        <section class="account-panel account-panel--wide store-panel" style="margin-top:32px;">
+          <div class="account-panel__head">
+            <h2>My Store</h2>
+            <span>Stock products, sell to your customers — we deliver</span>
+          </div>
+          <p class="store-gate" role="status" aria-live="polite" data-store-gate hidden></p>
+
+          <!-- Store profile and approval -->
+          <div class="store-profile" data-store-profile style="margin-bottom:24px;">
+            <div class="store-profile__head">
+              <h3>Store profile</h3>
+              <span class="store-status" data-store-status>Not created</span>
+            </div>
+            <p class="field-hint" data-store-review-note hidden></p>
+            <p class="store-public" data-store-public hidden>
+              Your storefront is live at <a data-store-public-link href="#" target="_blank" rel="noopener"></a>
+            </p>
+            <form data-store-profile-form novalidate>
+              <div class="field-row">
+                <div class="field" style="flex:2;">
+                  <label for="store-name">Store name</label>
+                  <input id="store-name" name="name" type="text" required minlength="2" maxlength="70" placeholder="e.g. Aster Beauty Edit">
+                </div>
+                <div class="field" style="flex:1;">
+                  <label for="store-slug">Store address</label>
+                  <input id="store-slug" name="slug" type="text" minlength="3" maxlength="40" pattern="[a-z0-9-]+" placeholder="aster-beauty">
+                  <p class="field-hint">velune.store/store/<span data-store-slug-preview>your-store</span></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="store-tagline">Tagline <span>(optional)</span></label>
+                <input id="store-tagline" name="tagline" type="text" maxlength="120" placeholder="A short line shown at the top of your store.">
+              </div>
+              <div class="field">
+                <label for="store-about">About your store <span>(optional)</span></label>
+                <textarea id="store-about" name="about" rows="3" maxlength="1200" placeholder="Who you buy for, how you choose products, anything your customers should know."></textarea>
+              </div>
+              <div class="field">
+                <label for="store-contact">Store contact email</label>
+                <input id="store-contact" name="contactEmail" type="email" maxlength="254">
+              </div>
+              <p class="form-error" role="alert" data-store-profile-error></p>
+              <p class="account-saved" role="status" data-store-profile-status></p>
+              <div class="store-profile__actions">
+                <button class="btn btn--small" type="submit" data-store-profile-save>Save store details</button>
+                <button class="btn btn--ghost btn--small" type="button" data-store-submit-btn>Submit for review</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Add stock form -->
+          <div class="store-add-form">
+            <h3>Add products to your store</h3>
+            <p class="field-hint">Choose a product from the catalog, set how many units you want to stock. Payment is handled at checkout. We will dispatch to your buyer once their order is placed through your store.</p>
+            <form data-store-add-form novalidate>
+              <div class="field-row">
+                <div class="field" style="flex:2;">
+                  <label for="store-product-select">Product</label>
+                  <select id="store-product-select" name="slug" required data-store-product-select>
+                    <option value="">Select a product…</option>
+                  </select>
+                </div>
+                <div class="field" style="flex:0 0 90px;">
+                  <label for="store-qty">Units</label>
+                  <input id="store-qty" name="qty" type="number" min="1" max="100" value="1" required>
+                </div>
+                <div class="field" style="flex:0 0 120px;">
+                  <label for="store-price">Selling price</label>
+                  <input id="store-price" name="price" type="number" min="1" max="100000" step="0.01" placeholder="Catalog price">
+                </div>
+                <div class="field" style="flex:0 0 auto;display:flex;align-items:flex-end;">
+                  <button class="btn btn--small" type="submit" data-store-add-btn>Add to store</button>
+                </div>
+              </div>
+              <p class="form-error" role="alert" data-store-add-error></p>
+              <p class="account-saved" role="status" data-store-add-status></p>
+            </form>
+          </div>
+
+          <!-- Current inventory -->
+          <div class="store-inventory" style="margin-top:24px;">
+            <h3>Your inventory</h3>
+            <div data-store-inventory>
+              <p class="field-hint">Loading your store inventory…</p>
+            </div>
+            <p class="form-error" role="alert" data-store-inventory-error></p>
+          </div>
+
+          <!-- Sell / place order on behalf of buyer -->
+          <div class="store-sell-form" style="margin-top:28px;">
+            <h3>Place order for a buyer</h3>
+            <p class="field-hint">Enter your buyer's details and the items they want. We will fulfil and ship directly to them — you pay the store price, collect what you like from your buyer.</p>
+            <form data-store-sell-form novalidate>
+              <fieldset class="form-section" style="border:none;padding:0;margin:0 0 16px;">
+                <legend style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Buyer contact</legend>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="sell-first">First name</label>
+                    <input id="sell-first" name="firstName" type="text" required minlength="2" maxlength="60">
+                  </div>
+                  <div class="field">
+                    <label for="sell-last">Last name</label>
+                    <input id="sell-last" name="lastName" type="text" required minlength="2" maxlength="60">
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="sell-email">Email</label>
+                    <input id="sell-email" name="email" type="email" required maxlength="254">
+                  </div>
+                  <div class="field">
+                    <label for="sell-phone">Phone <span>(optional)</span></label>
+                    <input id="sell-phone" name="phone" type="tel" maxlength="30">
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-section" style="border:none;padding:0;margin:0 0 16px;">
+                <legend style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Delivery address</legend>
+                <div class="field">
+                  <label for="sell-address1">Street address</label>
+                  <input id="sell-address1" name="address1" type="text" required minlength="3" maxlength="120">
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="sell-city">City</label>
+                    <input id="sell-city" name="city" type="text" required minlength="2" maxlength="80">
+                  </div>
+                  <div class="field">
+                    <label for="sell-state">State</label>
+                    <select id="sell-state" name="state" required data-sell-state-select>
+                      <option value="">Select state</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="sell-zip">ZIP</label>
+                    <input id="sell-zip" name="zip" type="text" inputmode="numeric" required pattern="\d{5}(-\d{4})?" maxlength="10" placeholder="97209">
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-section" style="border:none;padding:0;margin:0 0 16px;">
+                <legend style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Items from your store</legend>
+                <div data-sell-items-list></div>
+                <button class="btn btn--ghost btn--small" type="button" data-sell-add-item style="margin-top:8px;">+ Add item</button>
+              </fieldset>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="sell-shipping">Delivery</label>
+                  <select id="sell-shipping" name="shippingMethod">
+                    <option value="standard">Standard (3–5 days · $8)</option>
+                    <option value="express">Express (1–2 days · $18)</option>
+                  </select>
+                </div>
+              </div>
+
+              <p class="form-error" role="alert" data-store-sell-error></p>
+              <p class="account-saved" role="status" data-store-sell-status></p>
+              <button class="btn btn--small" type="submit" data-store-sell-btn>Place order for buyer</button>
+            </form>
+          </div>
+
+          <!-- Store orders -->
+          <div style="margin-top:28px;">
+            <h3>Store orders</h3>
+            <div data-store-orders>
+              <p class="field-hint">Loading store orders…</p>
+            </div>
+          </div>
+        </section>
+        <!-- ============ /RESELLER STORE ============ -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>

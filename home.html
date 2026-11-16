@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="{{OG_TYPE}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/images/hero-cosmetics.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="home">
+<!--@header-->
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">The Skin Edit · 2026</span>
+        <h1>Rituals that <span class="accent">earn</span> their place.</h1>
+        <p class="hero-lede">Skincare, colour, hair and fragrance — a concise catalogue built around barrier care, honest ingredients and textures that feel as good as they look.</p>
+        <div class="hero-actions">
+          <a class="btn" href="/shop">Shop the collection</a>
+          <a class="link-arrow" href="#craft">
+            Our approach
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>Skin-first</strong>Barrier-led formulas</div>
+          <div><strong>U.S. &amp; India</strong>Free U.S. shipping over $150</div>
+          <div><strong>Returns</strong>30 days, unopened</div>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <div class="hero-media">
+          <img src="/images/hero-cosmetics.jpg" alt="Amber glass serum, ceramic cream jar and ivory tube on a travertine shelf in warm morning light" width="1024" height="1280" fetchpriority="high" decoding="async">
+        </div>
+        <div class="hero-stamp">Autumn<br>2026</div>
+        <figcaption class="hero-caption">Silk Milk Cleanser <span></span> Iris Powder Extrait</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="category-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Departments</span>
+          <h2>Shop by category</h2>
+        </div>
+        <a class="link-arrow section-link" href="/shop">
+          All products
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="category-rail">
+        {{HOME_CATEGORY_TILES}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Just arrived</span>
+          <h2>New &amp; noted</h2>
+          <p>New cleansers, serums and shades — added quietly, and in considered numbers.</p>
+        </div>
+        <a class="link-arrow section-link" href="/shop?sort=new">
+          View new arrivals
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="product-grid" data-grid="new" aria-live="polite">
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="container values-grid">
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM18 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/></svg>
+        <div><strong>Free U.S. shipping</strong><span>On orders over $150</span></div>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+        <div><strong>30-day returns</strong><span>Unused, in original condition</span></div>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.1 7.5 9.5 4.3-1.4 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.6 11.8 2.3 2.3 4.5-4.7"/></svg>
+        <div><strong>Cash on delivery</strong><span>Pay when your order arrives</span></div>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20 4c-7 0-13 3-13 9 0 3 2 5 5 5 6 0 8-7 8-14Z"/><path d="M4 20c1-5 4-8 9-10"/></svg>
+        <div><strong>Skin-first</strong><span>Barrier-led formulas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="craft">
+    <div class="container editorial">
+      <div class="editorial-media">
+        <img src="/images/editorial/formulation.jpg" alt="Hands weighing a white cream in a glass beaker at a sunlit formulation bench" width="1536" height="1024" loading="lazy">
+      </div>
+      <div class="editorial-copy">
+        <span class="eyebrow">Our approach</span>
+        <h2>Fewer ingredients, chosen with care.</h2>
+        <p>VELUNE began with a simple frustration: too many products, too much noise. We keep the catalogue tight and put the effort into formulas that respect the skin barrier — cleansers that do not strip, serums that do not sting, colour that wears comfortably.</p>
+        <p>Every formula lists what it is for and what it leaves out. Fragrance is declared. Actives are dosed sensibly. The result is a routine you can understand, not a shelf you have to decode.</p>
+        <div class="editorial-facts">
+          <div><strong>Skin-first</strong><span>Formulation</span></div>
+          <div><strong>Short lists</strong><span>Ingredients</span></div>
+          <div><strong>Every day</strong><span>Designed for</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight section--surface">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Most carried</span>
+          <h2>The ones that stay</h2>
+          <p>Bestsellers, in the quiet sense — the formulas our clients reorder and keep on the shelf.</p>
+        </div>
+        <a class="link-arrow section-link" href="/shop">
+          Shop all
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="product-grid" data-grid="best" aria-live="polite">
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">In use</span>
+          <h2>Lived with, not staged.</h2>
+        </div>
+      </div>
+      <div class="testimonials">
+        <figure class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+          </div>
+          <blockquote><p>“It takes off sunscreen without leaving my cheeks tight. That is rarer than it should be.”</p></blockquote>
+          <figcaption class="review-meta">Maya R. · Silk Milk Cleanser</figcaption>
+        </figure>
+        <figure class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+          </div>
+          <blockquote><p>“Soft, close to the skin, and it lasts through a workday without shouting.”</p></blockquote>
+          <figcaption class="review-meta">Daniel K. · Iris Powder Extrait</figcaption>
+        </figure>
+        <figure class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.9l5-.7L10 2.6Z"/></svg>
+          </div>
+          <blockquote><p>“I wake up with smoother skin and none of the redness I get from stronger peels.”</p></blockquote>
+          <figcaption class="review-meta">Priya S. · Lactic 5 Overnight Peel</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="materials">
+    <div class="container">
+      <div class="materials-banner">
+        <img src="/images/editorial/ingredients.jpg" alt="Oat and kaolin clay, shea butter, rose petals, rosemary and amber dropper bottles on travertine" width="1536" height="1024" loading="lazy">
+        <div class="materials-content">
+          <span class="eyebrow">Materials</span>
+          <h2>Oat, kaolin, squalane, rose.</h2>
+          <p>Colloidal oat to comfort. Kaolin to clarify without stripping. Plant squalane for barrier support. Rose and rosemary for the pleasure of the ritual. Ingredients we can explain, at doses that make sense.</p>
+          <a class="link-arrow" href="/shop">
+            See the collection
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="container newsletter-inner">
+      <div>
+        <span class="eyebrow">The Sunday Edit</span>
+        <h2>One considered email a month.</h2>
+        <p>New formulas, ingredient notes and the occasional routine guide. No noise, no daily sales.</p>
+      </div>
+      <div>
+        <form class="newsletter-form" data-newsletter-form novalidate>
+          <label class="visually-hidden" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" name="email" placeholder="Your email address" autocomplete="email" required>
+          <input class="visually-hidden" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit">
+            Subscribe
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <p class="newsletter-note" data-newsletter-note>One email a month. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>

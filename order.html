@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="order">
+<!--@header-->
+
+<main id="main">
+  <section class="order-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span>Order tracking</span>
+      </nav>
+
+      <div class="order-page__head">
+        <span class="eyebrow" data-order-eyebrow>Client care</span>
+        <h1 data-order-heading>Track your order</h1>
+        <p data-order-sub>Enter your order number and the email used at checkout. No account needed.</p>
+      </div>
+
+      <div class="order-lookup" data-order-lookup>
+        <h2>Find your order</h2>
+        <p>Your order number begins with VLN and was shown when the order was placed.</p>
+        <form data-lookup-form>
+          <div class="field">
+            <label for="order-number">Order number</label>
+            <input id="order-number" name="number" type="text" required placeholder="VLN-AB12-CD34" autocomplete="off" maxlength="20" pattern="VLN-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}" title="Order numbers look like VLN-AB12-CD34">
+          </div>
+          <div class="field">
+            <label for="order-email">Email used at checkout</label>
+            <input id="order-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email" maxlength="254">
+          </div>
+          <p class="form-error" role="alert" data-lookup-error></p>
+          <button class="btn" type="submit" data-lookup-submit>Find order</button>
+        </form>
+        <p class="order-lookup__hint">Looking for a recent order? Your confirmation page was linked with a private token. If you have lost it, use the form above. Need help? <a href="/contact">Contact support</a>.</p>
+      </div>
+
+      <div data-order-root hidden></div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>

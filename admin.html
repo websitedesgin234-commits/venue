@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4F7FC">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  {{JSONLD}}
+</head>
+<body class="admin-body" data-page="admin">
+
+<section class="admin-login" data-login-view>
+  <div class="login-card">
+    <a class="login-brand" href="/" aria-label="VELUNE storefront">VELUNE<span>Studio</span></a>
+    <span class="admin-kicker">Store operations</span>
+    <h1>Staff sign in.</h1>
+    <p>Administrators and authorized support employees can sign in here. Employee accounts only have access to customer support.</p>
+    <form data-login-form>
+      <label class="admin-label" for="admin-username">Username</label>
+      <input class="admin-input" id="admin-username" name="username" type="text" autocomplete="username" required placeholder="Enter your username" maxlength="100">
+      <label class="admin-label" for="admin-password">Password</label>
+      <input class="admin-input" id="admin-password" name="password" type="password" autocomplete="current-password" required placeholder="Enter your password" maxlength="200">
+      <p class="admin-form-error" role="alert" data-login-error></p>
+      <button class="admin-btn admin-btn--primary admin-btn--wide" type="submit" data-login-submit>Enter dashboard</button>
+    </form>
+    <p class="login-hint">Sessions expire after 12 hours. Contact the store owner if you are locked out.</p>
+    <a class="login-back" href="/">← Return to storefront</a>
+  </div>
+</section>
+
+<div class="admin-shell" data-dashboard hidden>
+  <aside class="admin-side" data-sidebar>
+    <div class="admin-side__head">
+      <a class="admin-brand" href="#overview" data-route="overview">VELUNE<span>Studio</span></a>
+      <button class="admin-icon-btn admin-side__close" type="button" aria-label="Close menu" data-sidebar-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <nav class="admin-nav" aria-label="Dashboard">
+      <button class="admin-nav__item is-active" type="button" data-route="overview" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="admin-nav__item" type="button" data-route="orders" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        Orders
+        <span class="admin-nav__badge" data-nav-orders-count hidden>0</span>
+      </button>
+      <button class="admin-nav__item" type="button" data-route="products" data-permission="products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+        Products
+      </button>
+      <button class="admin-nav__item" type="button" data-route="customers" data-permission="customers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5.8M18 19a5 5 0 0 0-2.5-4.3"/></svg>
+        Customers
+      </button>
+      <button class="admin-nav__item" type="button" data-route="verification" data-permission="customers,verification">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3 5 6v6c0 4 3 6.6 7 8 4-1.4 7-4 7-8V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        Verification
+        <span class="admin-nav__badge" data-nav-verification-count hidden>0</span>
+      </button>
+      <button class="admin-nav__item" type="button" data-route="stores" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h16v10H4z"/><path d="M3 4h18l-1 6H4L3 4Z"/><path d="M9 20v-5h6v5"/></svg>
+        Stores
+      </button>
+      <button class="admin-nav__item" type="button" data-route="integrations" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 7V3M15 7V3M7 7h10v5a5 5 0 0 1-10 0V7ZM12 17v4"/></svg>
+        Integrations
+      </button>
+      <button class="admin-nav__item" type="button" data-route="reports" data-permission="reports">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2"/></svg>
+        Reports
+      </button>
+      <button class="admin-nav__item" type="button" data-route="chat" data-permission="chat,tickets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 5h16v10H9l-5 4V5Z"/><path d="M8 9h8M8 12h5"/></svg>
+        Live Chat
+        <span class="admin-nav__badge" data-nav-chat-count hidden>0</span>
+      </button>
+      <button class="admin-nav__item" type="button" data-route="support" data-permission="chat,tickets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 20l1.6-4.4A7.5 7.5 0 1 1 20 11.5Z"/></svg>
+        Support
+        <span class="admin-nav__badge" data-nav-tickets-count hidden>0</span>
+      </button>
+      <button class="admin-nav__item" type="button" data-route="delivery" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
+        Delivery
+        <span class="admin-nav__badge" data-nav-delivery-count hidden>0</span>
+      </button>
+      <button class="admin-nav__item" type="button" data-route="subscribers" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h18v11H3z"/><path d="m3 7 9 7 9-7"/></svg>
+        Subscribers
+      </button>
+      <button class="admin-nav__item" type="button" data-route="team" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 20a4 4 0 0 1 8 0"/></svg>
+        Support team
+      </button>
+      <button class="admin-nav__item" type="button" data-route="settings" data-admin-only>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h9M17 17h3"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="17" r="2"/></svg>
+        Settings
+      </button>
+    </nav>
+    <div class="admin-side__foot">
+      <div class="admin-user">
+        <span class="admin-user__avatar" data-staff-avatar>V</span>
+        <div>
+          <strong data-staff-name>Staff member</strong>
+          <span data-session-status>Session active</span>
+        </div>
+      </div>
+      <button class="admin-logout" type="button" data-logout>Sign out</button>
+    </div>
+  </aside>
+
+  <div class="admin-side-scrim" data-sidebar-scrim hidden></div>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="admin-icon-btn admin-menu-toggle" type="button" aria-label="Open menu" data-sidebar-toggle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="admin-breadcrumb"><span>Studio</span><span>/</span><strong data-page-title>Overview</strong></div>
+      <div class="admin-topbar__actions">
+        <span class="admin-date" data-admin-date></span>
+        <a class="admin-toplink" href="/" target="_blank" rel="noopener">View store
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4 11 13M10 5H5v14h14v-5"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <section class="admin-view" data-view="overview">
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Store pulse</span>
+            <h1>Overview</h1>
+            <p>The last 30 days at a glance, plus what needs attention now.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <div class="stat-grid" data-overview-stats>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+        </div>
+        <div class="admin-columns">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Recent orders</h2>
+              <button class="admin-text-btn" type="button" data-route="orders">View all</button>
+            </div>
+            <div class="admin-table-wrap" data-recent-orders></div>
+          </section>
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Needs attention</h2>
+            </div>
+            <div data-attention></div>
+          </section>
+        </div>
+        <div class="admin-columns admin-columns--wide-left">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Most requested</h2>
+              <span class="admin-muted">By units sold, all time</span>
+            </div>
+            <div data-top-products></div>
+          </section>
+          <section class="admin-panel admin-panel--note">
+            <span class="admin-kicker">Operating note</span>
+            <h2>Store operations</h2>
+            <p>Orders, stock and tickets written here persist in <code>data/db.json</code> on this server. Payments are collected on delivery (COD) or confirmed over WhatsApp — no card data is stored. Set your WhatsApp number and support email in Settings.</p>
+            <a class="admin-btn admin-btn--outline" href="/policies" target="_blank" rel="noopener">Review policies</a>
+          </section>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="orders" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Fulfilment</span>
+            <h1>Orders</h1>
+            <p>Update status and add tracking. Cancelling an order restocks its items.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="orders">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search order, customer or email…" aria-label="Search orders" data-order-search>
+            </div>
+            <select class="admin-select" aria-label="Filter by status" data-order-status>
+              <option value="all">All statuses</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Packed">Packed</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+            <select class="admin-select" aria-label="Filter by payment status" data-order-payment>
+              <option value="all">All payments</option>
+              <option value="Awaiting Payment">Awaiting payment</option>
+              <option value="Proof submitted">Slip submitted</option>
+              <option value="Paid">Paid</option>
+              <option value="Refunded">Refunded</option>
+            </select>
+            <span class="admin-count" data-orders-count></span>
+          </div>
+          <div class="admin-table-wrap" data-orders-table></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="products" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Catalogue</span>
+            <h1>Products</h1>
+            <p>Manage price, stock, imagery and copy. Changes appear on the storefront immediately.</p>
+          </div>
+          <button class="admin-btn admin-btn--primary" type="button" data-add-product>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Add product
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search product or SKU…" aria-label="Search products" data-product-search>
+            </div>
+            <select class="admin-select" aria-label="Filter by category" data-product-category>
+              <option value="all">All categories</option>
+            </select>
+            <span class="admin-count" data-products-count></span>
+          </div>
+          <div class="admin-table-wrap" data-products-table></div>
+          <div class="admin-loadmore" data-products-more hidden></div>
+        </section>
+        <section class="admin-panel">
+          <div class="admin-panel__head">
+            <h2>Categories</h2>
+            <span class="admin-muted">Price range and stock held per category</span>
+          </div>
+          <div class="admin-table-wrap" data-category-stats></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="chat" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Client care</span>
+            <h1>Live Chat</h1>
+            <p>Every customer conversation in one inbox. Messages arrive as they are typed — reply here and the storefront updates instantly.</p>
+          </div>
+          <div class="admin-head-actions">
+            <span class="lc-live" data-lc-live><i></i>Connecting…</span>
+            <button class="admin-btn" type="button" data-refresh="chat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div class="lc-desk">
+          <aside class="lc-inbox" aria-label="Conversations">
+            <div class="lc-inbox__bar">
+              <div class="admin-segmented" role="group" aria-label="Filter conversations">
+                <button class="is-active" type="button" data-lc-filter="open">Open</button>
+                <button type="button" data-lc-filter="unread">Unread</button>
+                <button type="button" data-lc-filter="resolved">Resolved</button>
+                <button type="button" data-lc-filter="all">All</button>
+              </div>
+              <input class="admin-input lc-inbox__search" type="search" placeholder="Name, email, phone or chat ID" aria-label="Search conversations" data-lc-search>
+            </div>
+            <div class="lc-list" data-lc-list></div>
+            <p class="lc-notify-note" data-lc-notify hidden></p>
+          </aside>
+          <section class="lc-thread" data-lc-thread aria-label="Conversation"></section>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="support" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Client care</span>
+            <h1>Support</h1>
+            <p>Automated chat escalations land here. Reply by email, then mark the ticket resolved.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="support">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-segmented" role="group" aria-label="Filter tickets">
+              <button class="is-active" type="button" data-ticket-filter="open">Open</button>
+              <button type="button" data-ticket-filter="resolved">Resolved</button>
+              <button type="button" data-ticket-filter="all">All</button>
+            </div>
+            <span class="admin-count" data-tickets-count></span>
+          </div>
+          <div class="ticket-list" data-tickets-list></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="subscribers" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Audience</span>
+            <h1>Subscribers</h1>
+            <p>Email addresses collected through the newsletter. No campaign tool is connected.</p>
+          </div>
+          <button class="admin-btn" type="button" data-copy-subscribers>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V4H4v12h4"/></svg>
+            Copy emails
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search subscribers…" aria-label="Search subscribers" data-subscriber-search>
+            </div>
+            <span class="admin-count" data-subscribers-count></span>
+          </div>
+          <div class="admin-table-wrap" data-subscribers-table></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="customers" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Relationships</span>
+            <h1>Customers</h1>
+            <p>Registered accounts, their order counts and lifetime value. Guest orders remain searchable under Orders.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="customers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search name or email…" aria-label="Search customers" data-customer-search>
+            </div>
+            <span class="admin-count" data-customers-count></span>
+          </div>
+          <div class="admin-table-wrap" data-customers-table></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="team" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Access control</span>
+            <h1>Support team</h1>
+            <p>Employee accounts and what each one may reach. New accounts default to the support desk only.</p>
+          </div>
+          <div class="admin-head-actions">
+            <button class="admin-btn" type="button" data-refresh="team">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+              Refresh
+            </button>
+            <button class="admin-btn admin-btn--primary" type="button" data-add-staff>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add employee
+            </button>
+          </div>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search name or username…" aria-label="Search employees" data-staff-search>
+            </div>
+            <span class="admin-count" data-staff-count></span>
+          </div>
+          <div class="admin-table-wrap" data-staff-table></div>
+          <p class="admin-form-hint">Disabled accounts cannot sign in and lose access immediately. Deleting removes the account for good; conversations already assigned to it stay in the inbox.</p>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="verification" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Identity desk</span>
+            <h1>Verification</h1>
+            <p>Contact checks are verified by one-time codes; identity documents are reviewed here by an administrator.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="verification">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <p class="admin-note">
+          <strong>Privacy.</strong> Every document view is recorded against your username and the files are streamed only to this page — they are never public links.
+          Identity documents are access-logged and must not be downloaded unnecessarily. Open one only while deciding on it, and purge stored files when a decision has been made.
+        </p>
+        <div class="admin-columns admin-columns--settings">
+          <section class="admin-panel">
+            <div class="admin-toolbar">
+              <div class="admin-segmented" role="group" aria-label="Filter verification queue">
+                <button class="is-active" type="button" data-verify-filter="queue">Needs review</button>
+                <button type="button" data-verify-filter="pending">Pending</button>
+                <button type="button" data-verify-filter="approved">Approved</button>
+                <button type="button" data-verify-filter="rejected">Rejected</button>
+                <button type="button" data-verify-filter="unverified">Unverified</button>
+              </div>
+              <div class="admin-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+                <input type="search" placeholder="Search name, email or phone…" aria-label="Search verification queue" data-verify-search>
+              </div>
+              <span class="admin-count" data-verify-count></span>
+            </div>
+            <div class="admin-table-wrap" data-verify-table></div>
+          </section>
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Customer detail</h2>
+              <span class="admin-muted" data-verify-policy-note>Pick a customer on the left.</span>
+            </div>
+            <div data-verify-detail></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="stores" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Dropshipping</span>
+            <h1>Stores</h1>
+            <p>Independent storefronts run by verified customers. Approve a store before its products can be published.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="stores">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search store, owner or address…" aria-label="Search stores" data-store-search>
+            </div>
+            <span class="admin-count" data-stores-count></span>
+          </div>
+          <div class="admin-table-wrap" data-stores-table></div>
+          <p class="admin-form-hint">A store only sells while it is approved and its owner still passes reseller verification. Suspending it takes the public page offline without deleting its stock or orders.</p>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="integrations" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Sales channels</span>
+            <h1>Integrations</h1>
+            <p>Connect Shopify, WooCommerce or a supplier API. Credentials are encrypted at rest and are never returned to this page after saving.</p>
+          </div>
+          <div class="admin-head-actions">
+            <button class="admin-btn" type="button" data-refresh="integrations">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+              Refresh
+            </button>
+            <button class="admin-btn admin-btn--primary" type="button" data-integration-add>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Connect channel
+            </button>
+          </div>
+        </div>
+        <p class="admin-note">
+          <strong>How it works.</strong> Test a channel before using it. Import pulls the channel catalogue and links products so stock stays in step; export pushes VELUNE products. Stock sync sends the current price and stock, and sending an order creates the matching remote order once. Every attempt is appended to the activity log.
+        </p>
+        <div class="admin-columns admin-columns--settings">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Connected channels</h2>
+              <span class="admin-muted" data-integrations-count></span>
+            </div>
+            <div class="integration-list" data-integrations-list></div>
+          </section>
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Channel activity</h2>
+              <span class="admin-muted">Newest first</span>
+            </div>
+            <div class="admin-table-wrap" data-integration-jobs></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="reports" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Margins</span>
+            <h1>Reports</h1>
+            <p>Costs are taken from the snapshot stored with each order, so repricing never rewrites history.</p>
+          </div>
+          <div class="admin-head-actions">
+            <select class="admin-select" aria-label="Report range" data-report-range>
+              <option value="7">Last 7 days</option>
+              <option value="30" selected>Last 30 days</option>
+              <option value="90">Last 90 days</option>
+              <option value="365">Last 12 months</option>
+              <option value="all">All time</option>
+            </select>
+            <button class="admin-btn" type="button" data-refresh="reports">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div class="rp-tiles" data-report-tiles>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+          <div class="admin-skeleton admin-skeleton--stat"></div>
+        </div>
+        <section class="admin-panel">
+          <div class="admin-panel__head">
+            <h2>Revenue and profit by day</h2>
+            <span class="admin-muted" data-report-window></span>
+          </div>
+          <div class="rp-chart" data-report-chart></div>
+        </section>
+        <div class="admin-columns admin-columns--wide-left">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Per product</h2>
+              <span class="admin-muted">Sold in range, with the price and cost on the catalogue today</span>
+            </div>
+            <div class="admin-table-wrap" data-report-products></div>
+            <div class="admin-loadmore" data-report-products-more hidden></div>
+          </section>
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Payment mix</h2>
+              <span class="admin-muted">Revenue by method</span>
+            </div>
+            <div class="rp-mix" data-report-paymentmix></div>
+          </section>
+        </div>
+        <section class="admin-panel admin-panel--payments">
+          <div class="admin-panel__head">
+            <h2>Operating expenses</h2>
+            <p class="admin-muted" data-expense-note>Recorded by hand — packaging, courier contracts, advertising. Never mixed into product margin.</p>
+          </div>
+          <form class="exp-form" data-expense-form>
+            <label class="admin-field">
+              <span>Expense</span>
+              <input class="admin-input" name="label" required maxlength="80" placeholder="Courier contract">
+            </label>
+            <label class="admin-field">
+              <span>Amount (USD)</span>
+              <input class="admin-input" name="amount" type="number" min="0.01" max="1000000" step="0.01" required placeholder="120.00">
+            </label>
+            <label class="admin-field">
+              <span>Repeats</span>
+              <select class="admin-select" name="period">
+                <option value="monthly">Monthly</option>
+                <option value="one-time">One-time</option>
+              </select>
+            </label>
+            <label class="admin-field">
+              <span>Date</span>
+              <input class="admin-input" name="date" type="date">
+            </label>
+            <label class="admin-field admin-field--wide">
+              <span>Note <em>optional</em></span>
+              <input class="admin-input" name="note" maxlength="200" placeholder="Vendor, invoice number">
+            </label>
+            <div class="om-actions">
+              <p class="admin-form-error" role="alert" data-expense-error></p>
+              <span class="admin-actions-spacer"></span>
+              <button class="admin-btn admin-btn--primary" type="submit" data-expense-save>Add expense</button>
+            </div>
+          </form>
+          <div class="admin-table-wrap" data-expenses-table></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="delivery" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">One-time codes</span>
+            <h1>Delivery</h1>
+            <p>Every verification code the store tried to send. While no SMTP or SMS credentials are set, entries stay here so codes remain readable.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="delivery">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <p class="admin-note" data-delivery-note>Loading delivery providers…</p>
+        <section class="admin-panel">
+          <div class="admin-toolbar">
+            <select class="admin-select" aria-label="Filter by status" data-delivery-status>
+              <option value="all">All statuses</option>
+              <option value="queued">Queued</option>
+              <option value="outbox">In outbox</option>
+              <option value="sent">Sent</option>
+              <option value="failed">Failed</option>
+            </select>
+            <div class="admin-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Search recipient or subject…" aria-label="Search deliveries" data-delivery-search>
+            </div>
+            <label class="dl-toggle">
+              <input type="checkbox" data-delivery-auto>
+              <span>Auto-refresh 10s</span>
+            </label>
+            <span class="admin-count" data-delivery-count></span>
+          </div>
+          <div class="admin-table-wrap" data-delivery-table></div>
+        </section>
+      </section>
+
+      <section class="admin-view" data-view="settings" hidden>
+        <div class="admin-view__head">
+          <div>
+            <span class="admin-kicker">Configuration</span>
+            <h1>Settings</h1>
+            <p>Support channels and storefront messaging. Changes appear immediately on the next page load.</p>
+          </div>
+          <button class="admin-btn" type="button" data-refresh="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+            Refresh
+          </button>
+        </div>
+        <div class="admin-columns admin-columns--settings">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Support &amp; storefront</h2>
+              <span class="admin-muted">Shown site-wide</span>
+            </div>
+            <form data-settings-form>
+              <div class="admin-form-grid">
+                <label class="admin-field admin-span-2">
+                  <span>Support email</span>
+                  <input class="admin-input" name="supportEmail" type="email" required maxlength="254" placeholder="support@yourdomain.com">
+                  <small>Used on the contact page, footer and email reply links.</small>
+                </label>
+                <label class="admin-field">
+                  <span>WhatsApp number</span>
+                  <input class="admin-input" name="whatsapp" type="tel" maxlength="25" placeholder="+1 555 010 0148">
+                  <small>Country code + number. Leave blank to hide the WhatsApp button.</small>
+                </label>
+                <label class="admin-field">
+                  <span>Telegram username</span>
+                  <input class="admin-input" name="telegram" type="text" maxlength="33" placeholder="@velunestudio">
+                  <small>Leave blank to hide the Telegram button.</small>
+                </label>
+                <label class="admin-field">
+                  <span>Support hours</span>
+                  <input class="admin-input" name="hours" required maxlength="120" placeholder="Monday–Friday, 9am–5pm Pacific">
+                </label>
+                <label class="admin-field">
+                  <span>Response time</span>
+                  <input class="admin-input" name="responseTime" required maxlength="120" placeholder="within one business day">
+                </label>
+                <label class="admin-field admin-span-2">
+                  <span>Announcement bar</span>
+                  <input class="admin-input" name="announcement" required maxlength="160" placeholder="Complimentary U.S. shipping over $150">
+                  <small>Keep it short — this sits in the top bar on every page.</small>
+                </label>
+              </div>
+              <p class="admin-form-error" role="alert" data-settings-error></p>
+              <p class="admin-form-hint" data-settings-hint>WhatsApp and Telegram only display once a value is saved.</p>
+              <div class="om-actions">
+                <a class="admin-btn admin-btn--outline" href="/contact" target="_blank" rel="noopener">Preview contact page</a>
+                <span class="admin-actions-spacer"></span>
+                <button class="admin-btn admin-btn--primary" type="submit" data-settings-save>Save settings</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Categories</h2>
+              <span class="admin-muted" data-categories-count></span>
+            </div>
+            <div class="admin-category-list" data-categories-list></div>
+            <form class="admin-category-add" data-category-form>
+              <input class="admin-input" name="name" maxlength="40" placeholder="New category name" required aria-label="New category name">
+              <button class="admin-btn admin-btn--tiny" type="submit">Add</button>
+            </form>
+            <p class="admin-form-error" role="alert" data-category-error></p>
+            <p class="admin-form-hint">Categories with products cannot be deleted. Renaming keeps existing products attached.</p>
+          </section>
+        </div>
+
+        <section class="admin-panel admin-panel--payments">
+          <div class="admin-panel__head">
+            <h2>Payment channels</h2>
+            <p class="admin-muted">A channel only appears at checkout, in the live chat and on the order page once its required detail is filled in.</p>
+          </div>
+          <div class="pm-grid" data-payments-grid></div>
+          <label class="admin-field admin-field--wide pm-instructions">
+            <span>Payment instructions shown to customers</span>
+            <textarea class="admin-textarea" name="paymentInstructions" rows="2" maxlength="500" data-payment-instructions></textarea>
+          </label>
+          <div class="om-actions">
+            <p class="admin-form-error" role="alert" data-payments-error></p>
+            <span class="admin-actions-spacer"></span>
+            <button class="admin-btn admin-btn--primary" type="button" data-payments-save>Save payment channels</button>
+          </div>
+        </section>
+
+        <div class="admin-columns admin-columns--settings">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Currency</h2>
+              <span class="admin-muted">Storefront display default</span>
+            </div>
+            <form data-currency-form>
+              <div class="admin-form-grid">
+                <label class="admin-field">
+                  <span>Display currency</span>
+                  <select class="admin-select" name="display">
+                    <option value="USD">USD — US dollars</option>
+                    <option value="INR">INR — Indian rupees</option>
+                  </select>
+                  <small>Prices are stored in USD. Shoppers can still switch; this is the default they land on.</small>
+                </label>
+                <label class="admin-field">
+                  <span>Rupees per US dollar</span>
+                  <input class="admin-input" name="inrPerUsd" type="number" min="0.01" max="9999" step="0.01" required>
+                  <small>Used to convert every displayed price.</small>
+                </label>
+                <label class="admin-field">
+                  <span>US symbol</span>
+                  <input class="admin-input" name="symbolUsd" maxlength="4" required placeholder="$">
+                </label>
+                <label class="admin-field">
+                  <span>Rupee symbol</span>
+                  <input class="admin-input" name="symbolInr" maxlength="4" required placeholder="₹">
+                </label>
+              </div>
+              <div class="om-actions">
+                <p class="admin-form-error" role="alert" data-currency-error></p>
+                <span class="admin-actions-spacer"></span>
+                <button class="admin-btn admin-btn--primary" type="submit" data-currency-save>Save currency</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Verification &amp; KYC</h2>
+              <span class="admin-muted">Applies to new sign-ups</span>
+            </div>
+            <form data-kyc-form>
+              <div class="admin-form-grid">
+                <label class="admin-field">
+                  <span>Verification mode</span>
+                  <select class="admin-select" name="mode">
+                    <option value="otp+documents">Codes and identity documents</option>
+                    <option value="otp">Email and mobile codes only</option>
+                  </select>
+                </label>
+                <label class="admin-field">
+                  <span>Document retention (days)</span>
+                  <input class="admin-input" name="retentionDays" type="number" min="7" max="3650" step="1" required>
+                  <small>7–3650. How long uploaded identity documents are kept.</small>
+                </label>
+                <label class="admin-field admin-span-2">
+                  <span>Accepted document types <em>comma separated</em></span>
+                  <input class="admin-input" name="acceptedDocTypes" maxlength="200" placeholder="aadhaar, passport, driving-licence, voter-id">
+                </label>
+                <label class="admin-field admin-span-2">
+                  <span>Features behind verification <em>comma separated</em></span>
+                  <input class="admin-input" name="protectedFeatures" maxlength="200" placeholder="wholesale, reseller">
+                  <small>Leave blank to gate nothing beyond checkout.</small>
+                </label>
+                <label class="admin-check admin-span-2">
+                  <input type="checkbox" name="requireDocumentsForReseller">
+                  <span>Require an approved identity document for wholesale and reseller access</span>
+                </label>
+              </div>
+              <div class="om-actions">
+                <p class="admin-form-error" role="alert" data-kyc-error></p>
+                <span class="admin-actions-spacer"></span>
+                <button class="admin-btn admin-btn--primary" type="submit" data-kyc-save>Save verification policy</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="admin-modal" role="presentation" aria-hidden="true" data-modal hidden>
+  <div class="admin-modal__scrim" data-modal-close></div>
+  <div class="admin-modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="admin-modal__head">
+      <h2 id="modal-title" data-modal-title>Detail</h2>
+      <button class="admin-icon-btn" type="button" aria-label="Close dialog" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="admin-modal__body" data-modal-body></div>
+  </div>
+</div>
+
+<div class="admin-toast" role="status" aria-live="polite" data-admin-toast></div>
+
+{{PAGE_SCRIPTS}}
+</body>
+</html>

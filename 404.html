@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="404">
+<!--@header-->
+
+<main id="main">
+  <section class="not-found">
+    <div class="container">
+      <div class="not-found__inner">
+        <span class="eyebrow">404 — Page not found</span>
+        <h1>This page has gone quiet.</h1>
+        <p>The address may have changed, or the piece you were looking for is no longer here. The collection is still close by.</p>
+        <div class="not-found__actions">
+          <a class="btn" href="/shop">Shop the collection</a>
+          <a class="link-arrow" href="/">
+            Return home
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="not-found__links">
+          <a href="/order">Track an order</a>
+          <a href="/policies#shipping">Shipping</a>
+          <a href="/policies#returns">Returns</a>
+          <a href="/contact">Contact support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>

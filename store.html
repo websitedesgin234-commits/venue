@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="{{OG_TYPE}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="store">
+<!--@header-->
+
+<main id="main">
+  <section class="store-hero">
+    <div class="container store-hero__inner">
+      <div>
+        <span class="eyebrow">Independent edit</span>
+        <h1>{{STORE_NAME}}</h1>
+        <p class="store-hero__tagline">{{STORE_TAGLINE}}</p>
+        <p class="store-hero__about">{{STORE_ABOUT}}</p>
+      </div>
+      <div class="store-hero__meta">
+        <div><strong>{{STORE_ITEM_COUNT}}</strong><span>products listed</span></div>
+        <div><strong>VELUNE</strong><span>fulfilled &amp; shipped</span></div>
+        <div><strong>COD</strong><span>pay on delivery</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container store-layout">
+      <div class="store-catalogue">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <span class="eyebrow">The shelf</span>
+            <h2>Selected by {{STORE_NAME}}</h2>
+          </div>
+        </div>
+        <div class="store-grid" data-store-grid>
+          {{STORE_ITEMS}}
+        </div>
+      </div>
+
+      <aside class="store-order" id="order">
+        <form data-store-order-form novalidate>
+          <div class="store-order__head">
+            <span class="eyebrow">Checkout</span>
+            <h2>Your order</h2>
+            <p class="field-hint">Cash on delivery. VELUNE ships this order on behalf of the store.</p>
+          </div>
+
+          <div class="store-bag" data-store-bag>
+            <p class="field-hint">Your bag is empty. Add a product from the shelf.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="store-first">First name</label>
+              <input id="store-first" name="firstName" type="text" autocomplete="given-name" required minlength="2" maxlength="60">
+            </div>
+            <div class="field">
+              <label for="store-last">Last name</label>
+              <input id="store-last" name="lastName" type="text" autocomplete="family-name" required minlength="2" maxlength="60">
+            </div>
+          </div>
+          <div class="field">
+            <label for="store-email">Email</label>
+            <input id="store-email" name="email" type="email" autocomplete="email" required maxlength="254">
+          </div>
+          <div class="field">
+            <label for="store-phone">Phone</label>
+            <input id="store-phone" name="phone" type="tel" autocomplete="tel" required maxlength="30">
+          </div>
+          <div class="field">
+            <label for="store-country">Country</label>
+            <select id="store-country" name="country" required data-store-country>
+              <option value="US">United States</option>
+              <option value="IN">India</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="store-address1">Street address</label>
+            <input id="store-address1" name="address1" type="text" autocomplete="address-line1" required minlength="3" maxlength="120">
+          </div>
+          <div class="field">
+            <label for="store-address2">Apartment, suite <span>(optional)</span></label>
+            <input id="store-address2" name="address2" type="text" autocomplete="address-line2" maxlength="120">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="store-city">City</label>
+              <input id="store-city" name="city" type="text" autocomplete="address-level2" required minlength="2" maxlength="80">
+            </div>
+            <div class="field">
+              <label for="store-state">State</label>
+              <select id="store-state" name="state" required data-store-state>
+                <option value="">Select state</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="store-zip" data-store-zip-label>ZIP code</label>
+              <input id="store-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required maxlength="10" data-store-zip>
+            </div>
+          </div>
+          <div class="field">
+            <label for="store-shipping">Delivery</label>
+            <select id="store-shipping" name="shippingMethod">
+              <option value="standard">Standard · 3–5 days · $8</option>
+              <option value="express">Express · 1–2 days · $18</option>
+            </select>
+          </div>
+
+          <dl class="store-summary">
+            <div><dt>Subtotal</dt><dd data-store-subtotal>$0.00</dd></div>
+            <div><dt>Shipping</dt><dd data-store-shipping>$0.00</dd></div>
+            <div class="store-summary__total"><dt>Total</dt><dd data-store-total>$0.00</dd></div>
+          </dl>
+
+          <p class="form-error" role="alert" data-store-order-error></p>
+          <button class="btn" type="submit" data-store-order-submit disabled>Place order</button>
+          <p class="field-hint">No card details are collected. Pay the courier when your parcel arrives.</p>
+        </form>
+
+        <div class="store-confirmation" data-store-confirmation hidden>
+          <span class="eyebrow">Order placed</span>
+          <h2>Thank you.</h2>
+          <p>Your order <strong data-store-order-number></strong> is confirmed. Keep the link below to track it.</p>
+          <p class="store-confirmation__total" data-store-order-total></p>
+          <a class="btn" data-store-order-link href="/order">View order</a>
+          <button class="btn btn--ghost" type="button" data-store-order-again>Place another order</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container store-support">
+      <div>
+        <span class="eyebrow">Questions</span>
+        <h2>This edit is supported by VELUNE client care.</h2>
+        <p>Order changes, delivery questions and returns are handled by the VELUNE team. The store owner can see their own order history in their account.</p>
+      </div>
+      <div class="store-support__actions">
+        <a class="btn btn--ghost" href="/contact">Contact client care</a>
+        <a class="link-arrow" href="/shop">Browse the full catalogue</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>

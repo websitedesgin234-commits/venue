@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="{{OG_TYPE}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="shop">
+<!--@header-->
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span>Shop</span>
+      </nav>
+      <h1>Shop all products</h1>
+      <p>Small-batch cosmetics for skin, hair and scent — made in house, filtered the way you actually browse.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="shop-toolbar">
+      <div class="filter-chips" role="group" aria-label="Filter by category">
+        <button type="button" class="chip is-active" data-category="all">All <span class="count" data-count="all"></span></button>
+        {{SHOP_CATEGORY_CHIPS}}
+      </div>
+      <div class="shop-controls">
+        <label class="select-wrap">
+          <span class="visually-hidden">Filter by price</span>
+          <select data-price-filter>
+            <option value="all">All prices</option>
+            <option value="under-55">Under $55</option>
+            <option value="55-100">$55 – $100</option>
+            <option value="100-200">$100 – $200</option>
+            <option value="200-plus">$200 &amp; above</option>
+          </select>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </label>
+        <label class="select-wrap">
+          <span class="visually-hidden">Sort products</span>
+          <select data-sort>
+            <option value="featured">Featured</option>
+            <option value="newest">Newest</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating">Highest rated</option>
+          </select>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <div class="shop-meta">
+      <span data-shop-count>Loading products…</span>
+      <button type="button" class="clear-filters hidden" data-clear-filters>Clear filters</button>
+    </div>
+
+    <div class="shop-results">
+      <div class="product-grid" data-shop-grid aria-live="polite">
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+        <div class="card-skeleton" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!--@footer-->
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="{{ROBOTS}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:site_name" content="VELUNE">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="theme-color" content="#F4F7FC">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  {{JSONLD}}
+</head>
+<body data-page="checkout">
+<!--@header-->
+
+<main id="main">
+  <section class="checkout-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/shop">Shop</a><span>/</span><span>Checkout</span>
+      </nav>
+
+      <div class="checkout-empty" data-checkout-empty hidden>
+        <div class="empty-state">
+          <h2>Your bag is empty</h2>
+          <p>Add a considered piece before continuing to checkout.</p>
+          <a class="btn" href="/shop">Explore the collection</a>
+        </div>
+      </div>
+
+      <div class="checkout-grid" data-checkout-grid hidden>
+        <div class="checkout-form">
+          <form novalidate data-checkout-form>
+            <div class="form-banner" role="alert" aria-live="assertive" data-form-banner></div>
+
+            <section class="form-section">
+              <div class="form-section__head">
+                <span class="form-section__num">01</span>
+                <h2>Contact</h2>
+              </div>
+              <p class="checkout-account-note" data-checkout-account hidden></p>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" maxlength="254">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="firstName">First name</label>
+                  <input id="firstName" name="firstName" type="text" autocomplete="given-name" required minlength="2" maxlength="60">
+                </div>
+                <div class="field">
+                  <label for="lastName">Last name</label>
+                  <input id="lastName" name="lastName" type="text" autocomplete="family-name" required minlength="2" maxlength="60">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="phone"><span data-phone-label>Phone</span> <span style="text-transform:none;letter-spacing:0;" data-phone-optional>(optional)</span></label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="For delivery updates only" data-phone-input>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section__head">
+                <span class="form-section__num">02</span>
+                <h2>Shipping address</h2>
+              </div>
+              <p class="field-hint" style="margin-bottom:14px;" data-country-hint>We ship to India and the United States — choose your country and the address fields adjust.</p>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="country">Country</label>
+                  <select id="country" name="country" autocomplete="country" required data-country-select>
+                    <option value="US">United States</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="address1">Street address</label>
+                  <input id="address1" name="address1" type="text" autocomplete="address-line1" required minlength="3" maxlength="120">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="address2">Apartment, suite, etc. <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
+                  <input id="address2" name="address2" type="text" autocomplete="address-line2" maxlength="120">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="city">City</label>
+                  <input id="city" name="city" type="text" autocomplete="address-level2" required minlength="2" maxlength="80">
+                </div>
+                <div class="field">
+                  <label for="state">State</label>
+                  <select id="state" name="state" autocomplete="address-level1" required data-state-select>
+                    <option value="">Select state</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="zip"><span data-zip-label>ZIP code</span></label>
+                  <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required pattern="\d{5}(-\d{4})?" maxlength="10" title="Enter a 5-digit ZIP code, e.g. 97209" placeholder="97209" data-zip-input>
+                </div>
+                <div class="field" data-gstin-row hidden>
+                  <label for="gstin">GSTIN <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
+                  <input id="gstin" name="gstin" type="text" autocomplete="off" spellcheck="false" maxlength="15" pattern="\d{2}[A-Z]{5}\d{4}[A-Z][0-9A-Z]{3}" title="15-character GSTIN, for example 22AAAAA0000A1Z5" placeholder="22AAAAA0000A1Z5" data-gstin-input>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field field--full">
+                  <label for="notes">Order note <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
+                  <textarea id="notes" name="notes" maxlength="500" placeholder="Delivery instructions or a gift note…"></textarea>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section__head">
+                <span class="form-section__num">03</span>
+                <h2>Delivery</h2>
+              </div>
+              <div class="ship-options" data-ship-options role="radiogroup" aria-label="Delivery speed">
+                <label class="ship-option is-selected">
+                  <input type="radio" name="shippingMethod" value="standard" checked>
+                  <span class="ship-option__text">
+                    <strong data-ship-label="standard">Standard</strong>
+                    <span><span data-ship-eta="standard">3–5 business days</span> · <span data-ship-free-note>complimentary above the free-shipping threshold</span></span>
+                  </span>
+                  <span class="ship-option__price" data-ship-price="standard">$8</span>
+                </label>
+                <label class="ship-option">
+                  <input type="radio" name="shippingMethod" value="express">
+                  <span class="ship-option__text">
+                    <strong data-ship-label="express">Express</strong>
+                    <span data-ship-eta="express">1–2 business days</span>
+                  </span>
+                  <span class="ship-option__price" data-ship-price="express">$18</span>
+                </label>
+              </div>
+              <p class="field-hint" style="margin-top:8px;" data-checkout-ship-note>Free shipping applies to standard delivery only.</p>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section__head">
+                <span class="form-section__num">04</span>
+                <h2>Payment</h2>
+              </div>
+
+              <div class="pay-method-options" role="radiogroup" aria-label="Payment method" data-pay-methods>
+                <label class="pay-method-option is-selected">
+                  <input type="radio" name="paymentMethod" value="Bank Transfer" checked>
+                  <span class="pay-method-option__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M8 12v4M16 12v4"/></svg>
+                  </span>
+                  <span class="pay-method-option__text">
+                    <strong>Bank Transfer</strong>
+                    <span>Pay before delivery — we dispatch once payment is confirmed</span>
+                  </span>
+                </label>
+                <label class="pay-method-option">
+                  <input type="radio" name="paymentMethod" value="Cash on delivery">
+                  <span class="pay-method-option__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M6 9h.01M18 9h.01"/></svg>
+                  </span>
+                  <span class="pay-method-option__text">
+                    <strong>Cash on Delivery</strong>
+                    <span>Pay when your order arrives at your door</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="pay-details" data-pay-panel>
+                <div class="bank-transfer-info">
+                  <svg class="bank-transfer-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <div>
+                    <p><strong>How it works:</strong> Place your order → pay with the details we show you → upload the payment slip from your order page → we confirm and dispatch.</p>
+                    <p style="margin-top:8px;color:var(--muted);">Your items are reserved for <strong>48 hours</strong> after placing the order. If payment is not received within this time, the order will be cancelled and stock released.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-row" data-pay-ref-row hidden>
+                <div class="field field--full">
+                  <label for="paymentReference">Payment reference <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
+                  <input id="paymentReference" name="paymentReference" type="text" maxlength="80" autocomplete="off" placeholder="UPI reference, Binance Pay order id or crypto tx hash">
+                </div>
+              </div>
+
+              <p class="field-hint pay-instructions" role="note" data-pay-instructions hidden></p>
+
+              <button class="btn btn--wide place-order-btn" type="submit" data-place-order>Place order</button>
+              <p class="checkout-terms">By placing this order you confirm the information above is accurate and agree to our <a class="text-link" href="/policies#terms">terms</a> and <a class="text-link" href="/policies#privacy">privacy policy</a>.</p>
+            </section>
+          </form>
+        </div>
+
+        <aside class="order-summary" aria-label="Order summary">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+            <h2>Order summary</h2>
+            <button class="text-link" type="button" data-cart-open style="font-size:10.5px;text-decoration:underline;text-underline-offset:3px;">Edit bag</button>
+          </div>
+          <div class="summary-items" data-summary-items>
+            <p class="field-hint">Loading your bag…</p>
+          </div>
+          <div class="promo-row">
+            <input type="text" placeholder="Promo code" aria-label="Promo code" autocomplete="off" maxlength="30" data-promo-input>
+            <button class="btn btn--ghost" type="button" data-promo-apply>Apply</button>
+          </div>
+          <p class="promo-message" role="status" data-promo-message></p>
+          <div class="summary-lines">
+            <div class="summary-line"><span>Subtotal</span><span data-summary-subtotal>—</span></div>
+            <div class="summary-line" data-discount-row hidden><span>Discount</span><span data-summary-discount>—</span></div>
+            <div class="summary-line"><span>Shipping</span><span data-summary-shipping>—</span></div>
+            <div class="summary-line"><span>Tax</span><span data-summary-tax>—</span></div>
+            <div class="summary-line summary-line--total"><span>Total</span><span data-summary-total>—</span></div>
+          </div>
+          <ul class="summary-trust">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.1 7.5 9.5 4.3-1.4 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.6 11.8 2.3 2.3 4.5-4.7"/></svg>
+              Pay first · dispatched after payment confirmation
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 0 1 14-4l2 2M20 14a8 8 0 0 1-14 4l-2-2M20 4v4h-4M4 20v-4h4"/></svg>
+              30-day returns on unused pieces
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Orders processed within 1–2 business days
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--@footer-->
+</body>
+</html>
